@@ -22,10 +22,7 @@ module.exports = {
     },
     create: async (req, res) => {
         try {
-            const user = new User({
-                email: req.body.email,
-                name: req.body.name
-            })
+            const user = new User(req.body)
             const result = await user.save()
 
             return res.send(result)
@@ -48,9 +45,9 @@ module.exports = {
     },
     delete: async (req, res) => {
         try {
-            const result = await User.remove({ id: req.params.userId })
+            const result = await User.remove({ _id: req.params.userId })
 
-            if (result) {
+            if (result.result.n != 0) {
                 return res.send({ message: `delete userId:${req.params.userId} success` })
             } else {
                 return res.send({ message: `userId:${req.params.userId} is not exists` })

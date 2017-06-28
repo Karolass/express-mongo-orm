@@ -1,7 +1,7 @@
 const { BaseSchema, conn } = require('../config/model.js')
 const UserSchema = new BaseSchema()
 
-UserSchema.add({
+UserSchema.extend({
     email: {
         type: String,
         required: true,
